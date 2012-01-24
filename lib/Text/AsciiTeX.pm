@@ -1,6 +1,6 @@
 package Text::AsciiTeX;
 
-use strict;
+use 5.012;
 use warnings;
 
 use parent 'Exporter';
@@ -14,13 +14,17 @@ XSLoader::load('Text::AsciiTeX', $VERSION);
 our @EXPORT = ( qw/ render / );
 
 sub render {
-  my ($eq, $columns) = @_;
+  my $eq = shift // '';
+  my $columns = shift // 80;
 
-  # defaults
-  $eq ||= '';
-  $columns = (defined $columns) ? $columns : 80;
+  my $aref = c_render($eq, $columns);
 
-  return c_render($eq, $columns);
+  # List or scalar context => return appropriate item.
+  return wantarray ? @$aref : $aref if defined wantarray;
+
+  # Void context => print output to stdout.
+  say for @$aref;
+
 }
 
 1;
