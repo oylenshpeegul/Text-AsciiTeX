@@ -50,9 +50,7 @@ Text::AsciiTeX - Convert (La)TeX formulas to ASCII art
 
   use Text::AsciiArt;
 
-  my $tex = q( \int_0^W \frac{np}{n+p}dx = \int_0^W \frac{n_0}
-              {exp \left(\frac{E_0(x-x_0)}{kT} \right)
-              +exp \left(-\frac{E_0(x-x_0)}{kT}\right)} dx   );
+  my $tex = q(\frac{1}{e});
 
   say "\nscalar context - return block of text";
   my $block = render $tex;
