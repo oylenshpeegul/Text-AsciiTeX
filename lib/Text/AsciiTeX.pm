@@ -19,11 +19,20 @@ sub render {
 
   my $aref = c_render($eq, $columns);
 
-  # List or scalar context => return appropriate item.
-  return wantarray ? @$aref : $aref if defined wantarray;
-
-  # Void context => print output to stdout.
-  say for @$aref;
+  if (defined wantarray) {
+      # List context - return array of lines.
+      if (wantarray) {
+          return @$aref;
+      }
+      # Scalar context - join lines with newlines.
+      else {
+          return join "\n", @$aref;
+      }
+  }
+  else {
+      # Void context - print lines.
+      say for @$aref;
+  }
 
 }
 
@@ -39,9 +48,22 @@ Text::AsciiTeX - Convert (La)TeX formulas to ASCII art
 
 =head1 SYNOPSIS
 
- use Text::AsciiArt;
- my $text_array = render('\frac{1}{e}');
- print "$_\n" for @$text_array;
+  use Text::AsciiArt;
+
+  my $tex = q( \int_0^W \frac{np}{n+p}dx = \int_0^W \frac{n_0}
+              {exp \left(\frac{E_0(x-x_0)}{kT} \right)
+              +exp \left(-\frac{E_0(x-x_0)}{kT}\right)} dx   );
+
+  say "\nscalar context - return block of text";
+  my $block = render $tex;
+  say $block;
+
+  say "\nlist context - return array of lines";
+  my @lines = render $tex;
+  say for @lines;
+
+  say "\nvoid context - print lines";
+  render $tex;
 
 =head1 DESCRIPTION
 
