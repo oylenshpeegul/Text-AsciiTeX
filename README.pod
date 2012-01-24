@@ -1,5 +1,7 @@
 
-This is a fork of Text::AsciiTeX by Joel Berger. When I tried it, I thought the array reference returned by render was a bit awkward, so I wondered what it would be like if made it depend on context.
+=head1 README
+
+This is a fork of Text::AsciiTeX by Joel Berger. When I tried it, I thought the array reference returned by render was a bit awkward, so I wondered what it would be like if we made it depend on context.
 
 
   use Text::AsciiArt;
