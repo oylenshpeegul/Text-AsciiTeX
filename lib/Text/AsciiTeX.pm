@@ -19,20 +19,12 @@ sub render {
 
   my $aref = c_render($eq, $columns);
 
-  if (defined wantarray) {
-      # List context - return array of lines.
-      if (wantarray) {
-          return @$aref;
-      }
-      # Scalar context - join lines with newlines.
-      else {
-          return join "\n", @$aref;
-      }
-  }
-  else {
-      # Void context - print lines.
-      say for @$aref;
-  }
+  # Scalar or List context - return appropriate item.
+  return wantarray ? @$aref : join "\n", @$aref
+      if defined wantarray;
+
+  # Void context - print lines.
+  say for @$aref;
 
 }
 
