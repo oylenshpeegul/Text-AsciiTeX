@@ -1,18 +1,25 @@
 
 =head1 README
 
-This is a fork of Text::AsciiTeX by Joel Berger. When I tried it, I thought the array reference returned by render was a bit awkward, so I wondered what it would be like if we made it depend on context.
+This is a fork of Text::AsciiTeX by Joel Berger. When I tried it, I
+thought the array reference returned by render was a bit awkward, so I
+wondered what it would be like if we made it depend on context.
 
 
   use Text::AsciiArt;
  
-  # scalar context
-  my $text_array = render('\frac{1}{e}');
-  say for @$text_array;
+  my $tex = q( \int_0^W \frac{np}{n+p}dx = \int_0^W \frac{n_0}
+               {exp \left(\frac{E_0(x-x_0)}{kT} \right)
+               +exp \left(-\frac{E_0(x-x_0)}{kT}\right)} dx   );
 
-  # list context;
-  say for render('\frac{1}{e}');
+  say "\nscalar context - return block of text";
+  my $block = render $tex;
+  say $block;
 
-  # void context;
-  render('\frac{1}{e}');
+  say "\nlist context - return array of lines";
+  my @lines = render $tex;
+  say for @lines;
+
+  say "\nvoid context - print lines";
+  render $tex;
 
