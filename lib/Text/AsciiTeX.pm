@@ -53,7 +53,7 @@ This module exports the C<render> function.
 
 =head2 C<< render( $latex [, $columns] ) >>
 
-The function C<render> accepts a string containing a formula in (La)TeX formatting. Optionally, an integer may be given to specify the number of columns for the output or zero for no-breaking. The default number of columns is 80. The return value is an array reference. Each element of the array is a string for each row of the art. Printing each line, terminated by a newline will probably do what you expect.
+The function C<render> accepts a string containing a formula in (La)TeX formatting. Optionally, an integer may be given to specify the number of columns for the output or zero for no-breaking. The default number of columns is 80. The return value is an array reference or an array, accoding to context (in void context, the output is printed to stdout). Each element of the array is a string for each row of the art. Printing each line, terminated by a newline will probably do what you expect.
 
 For examples and a list of allowed syntax read L<Text::AsciiTeX::Syntax>.
 
